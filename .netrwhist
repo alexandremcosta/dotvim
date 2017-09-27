@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/alexandre/Dev/d2s/agriweb'
+let g:netrw_dirhist_2='/home/alexandre/Dev/d2s/agriweb/src'
+let g:netrw_dirhist_3='/home/alexandre/Dev/d2s/agriweb/src/components'
+let g:netrw_dirhist_4='/home/alexandre/Dev/d2s/agriweb'
+let g:netrw_dirhist_5='/home/alexandre/Dev/d2s/agriweb/src'
+let g:netrw_dirhist_6='/home/alexandre/Dev/d2s/agriweb/src/components'
