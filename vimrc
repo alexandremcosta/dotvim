@@ -1,8 +1,6 @@
 " Pathogen setup
 execute pathogen#infect()
 
-" NERDTree
-map <C-n> :NERDTreeToggle<CR>
 " Close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Open NERDTree automatically when vim starts up on opening a directory
@@ -43,10 +41,36 @@ endfunction
 " Custom
 syntax on
 filetype plugin indent on
+set incsearch
+set relativenumber
 
+" Colorscheme
 set termguicolors
-" set t_Co=256
-
 let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark='hard'
 set background=dark
 colorscheme gruvbox
+
+" Usual mappings
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+map ; :
+
+" Maximize current split in a tab
+nnoremap <silent> <C-w>w :ZoomWin<CR>
+
+" NERDTree
+map <Leader>n :NERDTreeToggle<CR>
+
+" Ack
+nnoremap <Leader>a :Ack!<Space>
+
+" Move current line
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
