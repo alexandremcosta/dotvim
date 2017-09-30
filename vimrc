@@ -51,6 +51,9 @@ let g:gruvbox_contrast_dark='hard'
 set background=dark
 colorscheme gruvbox
 
+" Sudo save :W
+command W w !sudo tee % > /dev/null
+
 " Usual mappings
 noremap <Up> <NOP>
 noremap <Down> <NOP>
