@@ -1,28 +1,29 @@
-# Installation:
+## Installation
 
-1) Clone this repo
-
-    git clone git://github.com/alexandremcosta/dotvim.git ~/.vim
-
-2) Create symlinks
-
-    ln -s ~/.vim/vimrc ~/.vimrc  
-    ln -s ~/.vim/gvimrc ~/.gvimrc
-
-3) Update submodules
-
-    cd ~/.vim  
-    git submodule init  
-    git submodule update
-
-# Mappings
-
-## NERDTree: https://github.com/scrooloose/nerdtree
-	\n
-
-## Ctrlp: http://ctrlpvim.github.io/ctrlp.vim/
-	<c-p>
-
-## Emmet: https://raw.githubusercontent.com/mattn/emmet-vim/master/TUTORIAL
-	<c-y>,
+	git clone git://github.com/alexandremcosta/dotvim.git ~/.vim
 	
+	ln -s ~/.vim/vimrc ~/.vimrc  
+	ln -s ~/.vim/gvimrc ~/.gvimrc
+	
+	cd ~/.vim  
+	git submodule init  
+	git submodule update
+
+## How to add plugin
+
+	cd ~/.vim
+	git submodule add http://github.com/tpope/vim-fugitive.git bundle/fugitive
+	git add .
+	git commit -m "Install Fugitive.vim bundle as a submodule."
+
+## Mappings
+
+- Ack  `\a`
+
+- Ctrlp `&lt;c-p>`
+
+- Emmet `<c-y>,`
+
+- NERDTree `\n`
+
+- Zoomwin `\f`

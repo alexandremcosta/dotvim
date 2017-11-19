@@ -17,7 +17,6 @@ command SudoW w !sudo tee % > /dev/null
 map <Leader>n :NERDTreeToggle<CR>
 nnoremap <Leader>a :Ack!<Space>
 nnoremap <silent> <Leader>f :ZoomWin<CR>
-inoremap <silent> <Leader>f <Esc>:ZoomWin<CR>==gi
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
