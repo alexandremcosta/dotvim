@@ -9,6 +9,12 @@
 	git submodule init  
 	git submodule update
 
+## For proper airline fonts install powerline fonts
+
+ - https://github.com/vim-airline/vim-airline/#integrating-with-powerline-fonts
+ - On arch linux you can just install the powerline-fonts community package
+	
+
 ## How to add plugin
 
 	cd ~/.vim
