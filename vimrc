@@ -1,5 +1,5 @@
-" Pathogen setup
 execute pathogen#infect()
+" Pathogen setup
 
 syntax on
 filetype plugin indent on
@@ -10,6 +10,9 @@ set ignorecase
 set smartcase
 set nowrap " Prevent line breaks on long lines
 set cursorline!
+" set expandtab
+" set shiftwidth=2
+" set tabstop=2
 
 map ; :
 command SudoW w !sudo tee % > /dev/null
@@ -26,10 +29,10 @@ vmap <Leader>c y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
 nmap <Leader>v :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
 
 " Folds
-set foldmethod=syntax
-set nofoldenable
-set foldlevel=2
-nnoremap <Space> za
+" set foldmethod=syntax
+" set nofoldenable
+" set foldlevel=2
+" nnoremap <Space> za
 
 " Remove arrows
 noremap <Up> <NOP>
