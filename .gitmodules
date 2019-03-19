@@ -40,3 +40,6 @@
 [submodule "bundle/elixir"]
 	path = bundle/elixir
 	url = https://github.com/elixir-lang/vim-elixir.git
+[submodule "bundle/mix-format"]
+	path = bundle/mix-format
+	url = https://github.com/mhinz/vim-mix-format.git

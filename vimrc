@@ -75,6 +75,9 @@ let g:ctrlp_custom_ignore = {
       \ 'file': '\v\.(pyc|exe|so|dll|swp)$',
       \ }
 
+" Mix format for elixir code
+let g:mix_format_on_save = 1
+
 " Vue.js
 autocmd FileType vue syntax sync fromstart
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
