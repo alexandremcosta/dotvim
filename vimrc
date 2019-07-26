@@ -35,10 +35,10 @@ nmap <Leader>v :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
 " nnoremap <Space> za
 
 " Remove arrows
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
 
 " Move current line
 nnoremap <C-j> :m .+1<CR>==
@@ -71,7 +71,7 @@ let g:airline_theme='wombat'
 " Ctrlp
 set runtimepath^=~/.vim/bundle/ctrlp
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](\.(git|hg|svn)|(node_modules|tmp))$',
+      \ 'dir':  '\v[\/](\.(git|hg|svn)|(node_modules|tmp|_build|deps|rel))$',
       \ 'file': '\v\.(pyc|exe|so|dll|swp)$',
       \ }
 
