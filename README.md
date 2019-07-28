@@ -26,10 +26,10 @@
 
 - Ack  `\a`
 
-- Ctrlp `&lt;c-p>`
-
-- Emmet `<c-y>,`
+- Ctrlp `<c-p>`
 
 - NERDTree `\n`
 
 - Zoomwin `\f`
+
+- Buffers `F5 <-` and `F6 ->`

@@ -1,11 +1,12 @@
-maximize current split (in a tab)							ctrl-w + w
-save and exit (same as :wq)								:x
-list buffers                             						:ls                                   
-open buffer                              						:bN (N = buffer number)    
-search for word under cursor             						*     
-invert case of selected text             						~                                     
-convert tabs to spaces                   						:retab       
+search for word under cursor             						*
+invert case of selected text             						~
 change text inside brackets / parentheses / quotation marks				ci(, ci{, ci<, ci", ci'
-place cursor on top of screen								zt
-switches to insertion mode placing the cursor at the same location it was previously    gi
+list buffers                             						:ls
+open buffer                              						:bN (N = buffer number)
+delete current buffer									:bd
+place cursor on middle of screen							zz
+convert tabs to spaces                   						:retab
 
+# Custom mappings
+switch buffers 										F5 and F6
+switch tabs 										F7

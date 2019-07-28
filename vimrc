@@ -48,6 +48,22 @@ inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
+" Buffers
+set hidden
+
+" use bdelete N to delete buffer
+" :vb N to open buffer N in vertical split
+" :sbuffer N to open in horizontal split
+cabbrev vb vert sb
+
+" F5 and F6 to switch buffers
+nnoremap <F5> :bp<CR>
+nnoremap <F6> :bn<CR>
+
+" Tabs
+" F7 to switch tabs
+nnoremap <F7> :tabnext<CR>
+
 " Plugin mappings
 map <Leader>n :NERDTreeToggle<CR>
 nnoremap <Leader>a :Ack!<Space>
@@ -64,9 +80,12 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
 " Airline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='wombat'
+let g:airline_powerline_fonts = 1
+" Airline show buffers with number
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#formatter = 'short_path'
 
 " Ctrlp
 set runtimepath^=~/.vim/bundle/ctrlp

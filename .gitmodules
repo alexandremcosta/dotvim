@@ -31,3 +31,12 @@
 [submodule "bundle/mix-format"]
 	path = bundle/mix-format
 	url = https://github.com/mhinz/vim-mix-format.git
+[submodule "bundle/airline"]
+	path = bundle/airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule "bundle/airline-themes"]
+	path = bundle/airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "bundle/autoswap"]
+	path = bundle/autoswap
+	url = https://github.com/gioele/vim-autoswap.git
