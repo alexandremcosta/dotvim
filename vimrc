@@ -5,11 +5,15 @@ syntax on
 filetype plugin indent on
 
 set incsearch
-set number relativenumber
+set number
+" set number relativenumber
 set ignorecase
 set smartcase
 set nowrap " Prevent line breaks on long lines
 set cursorline!
+set colorcolumn=101
+
+" Removed in favor of sleuth
 " set expandtab
 " set shiftwidth=2
 " set tabstop=2
@@ -121,3 +125,6 @@ function! NERDCommenter_after()
     let g:ft = ''
   endif
 endfunction
+
+" Autoswp
+set title titlestring=
