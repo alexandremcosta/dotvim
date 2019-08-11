@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/ale/Dev/d2s/agriweb'
-let g:netrw_dirhist_2='/home/ale/Dev/d2s/agriweb/src'
-let g:netrw_dirhist_3='/home/ale/Dev/d2s/agriweb/src/components'
-let g:netrw_dirhist_4='/home/ale/Dev/d2s/agriweb'
-let g:netrw_dirhist_5='/home/ale/Dev/d2s/agriweb/src'
-let g:netrw_dirhist_6='/home/ale/Dev/d2s/agriweb/src/components'
-let g:netrw_dirhist_7='/home/ale/.vim/.git/modules/bundle'
-let g:netrw_dirhist_8='/home/ale/.vim/.git/modules/bundle/nerdtree'
-let g:netrw_dirhist_9='/home/ale/.vim/.git/modules/bundle'
+let g:netrw_dirhist_cnt =0

@@ -76,12 +76,20 @@ nnoremap <silent> <Leader>f :ZoomWin<CR>
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
+" NERDTree show hidden files
+let NERDTreeShowHidden=1
+
 " Close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Open NERDTree automatically when vim starts up on opening a directory
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --hidden --vimgrep'
+endif
 
 " Airline
 let g:airline_theme='wombat'
@@ -93,6 +101,7 @@ let g:airline#extensions#tabline#formatter = 'short_path'
 
 " Ctrlp
 set runtimepath^=~/.vim/bundle/ctrlp
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](\.(git|hg|svn)|(node_modules|tmp|_build|deps|rel))$',
       \ 'file': '\v\.(pyc|exe|so|dll|swp)$',
@@ -128,3 +137,4 @@ endfunction
 
 " Autoswp
 set title titlestring=
+
