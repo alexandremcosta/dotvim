@@ -6,14 +6,28 @@ filetype plugin indent on
 
 set incsearch
 set number
-" set number relativenumber
-set ignorecase
+set ignorecase " set number relativenumber
 set smartcase
 set nowrap " Prevent line breaks on long lines
 set cursorline!
-set colorcolumn=101
+set colorcolumn=100
+set backupcopy=yes " Webpack needs this to detect file changes
+set backspace=start,eol " Allow backspacing over the start of insert
 
-" Removed in favor of sleuth
+" Set ok Variable
+let g:os = substitute(system('uname'), '\n', '', '')
+
+" Mouse compatibility on OSX
+if g:os == "Darwin"
+  set ttyfast " Send more characters for redraws
+  set mouse=a " Enable mouse use in all modes
+else
+  " Set this to the name of your terminal that supports mouse codes.
+  " Must be one of: xterm, xterm2, netterm, dec, jsbterm, pterm
+  set ttymouse=xterm2
+endif
+
+" Removed in favor of sleuth plugin
 " set expandtab
 " set shiftwidth=2
 " set tabstop=2
@@ -27,10 +41,20 @@ let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='hard'
 set background=dark
 colorscheme gruvbox
+" Increase contrast of grubbox background
+if g:colors_name == "gruvbox"
+  highlight Normal ctermbg=16 guibg=#000000
+endif
 
-" Copy and paste from clipboard
-vmap <Leader>c y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
-nmap <Leader>v :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+" Copy and paste to clipboard
+if g:os == "Darwin"
+  " OSX y and p already use system's clipboad
+  set clipboard+=unnamed
+else
+  " Linux \c in visual model or \v in normal mode
+  vmap <Leader>c y: call system("xclip -i -selection clipboard", getreg("\""))<CR>
+  nmap <Leader>v :call setreg("\"",system("xclip -o -selection clipboard"))<CR>p
+endif
 
 " Folds
 " set foldmethod=syntax
@@ -103,7 +127,7 @@ let g:airline#extensions#tabline#formatter = 'short_path'
 set runtimepath^=~/.vim/bundle/ctrlp
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](\.(git|hg|svn)|(node_modules|tmp|_build|deps|rel))$',
+      \ 'dir':  '\v[\/](\.(git|hg|svn)|(node_modules|tmp|_build|deps|rel|vendor))$',
       \ 'file': '\v\.(pyc|exe|so|dll|swp)$',
       \ }
 
