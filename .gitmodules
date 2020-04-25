@@ -37,6 +37,3 @@
 [submodule "bundle/autoswap"]
 	path = bundle/autoswap
 	url = https://github.com/gioele/vim-autoswap.git
-[submodule "bundle/coc_nvim"]
-	path = bundle/coc_nvim
-	url = https://github.com/neoclide/coc.nvim
