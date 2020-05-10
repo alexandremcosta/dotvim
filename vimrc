@@ -13,6 +13,7 @@ set cursorline!
 set colorcolumn=100
 set backupcopy=yes " Webpack needs this to detect file changes
 set backspace=start,eol " Allow backspacing over the start of insert
+set redrawtime=10000 " Large files keep syntax highlight
 
 " Set ok Variable
 let g:os = substitute(system('uname'), '\n', '', '')
@@ -67,6 +68,9 @@ endif
 " noremap <Down> <NOP>
 " noremap <Left> <NOP>
 " noremap <Right> <NOP>
+
+" Mix test
+nnoremap <Leader>t :execute "terminal mix test %:" . line(".")<CR>
 
 " Move current line
 nnoremap <C-j> :m .+1<CR>==
@@ -127,7 +131,7 @@ let g:airline#extensions#tabline#formatter = 'short_path'
 set runtimepath^=~/.vim/bundle/ctrlp
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](\.(git|hg|svn|elixir_ls)|(node_modules|tmp|_build|deps|rel|vendor))$',
+      \ 'dir':  '\v[\/](\.(git|hg|svn|elixir_ls)|(node_modules|tmp|_build|deps|rel|vendor|cover))$',
       \ 'file': '\v\.(pyc|exe|so|dll|swp)$',
       \ }
 
