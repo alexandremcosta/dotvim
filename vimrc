@@ -38,14 +38,18 @@ command SudoW w !sudo tee % > /dev/null
 
 " Colorscheme
 set termguicolors
+set background=dark
+colorscheme molokai
+
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='hard'
-set background=dark
-colorscheme gruvbox
 " Increase contrast of grubbox background
 if g:colors_name == "gruvbox"
   highlight Normal ctermbg=16 guibg=#000000
 endif
+
+"" Opacity
+hi Normal guibg=NONE ctermbg=NONE
 
 " Copy and paste to clipboard
 if g:os == "Darwin"
