@@ -73,8 +73,14 @@ endif
 " noremap <Left> <NOP>
 " noremap <Right> <NOP>
 
+" Change cursor to line on insert mode
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
 " Mix test
 nnoremap <Leader>t :execute "terminal mix test %:" . line(".")<CR>
+nnoremap <Leader>T :execute "terminal mix test %"<CR>
+nnoremap <Leader>ti :execute "terminal iex -S mix test %:" . line(".")<CR>
 
 " Move current line
 nnoremap <C-j> :m .+1<CR>==
@@ -131,13 +137,32 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#formatter = 'short_path'
 
+" Ale
+" Required, explicitly enable Elixir LS
+let g:ale_linters.elixir = ['elixir-ls']
+
+" Required, tell ALE where to find Elixir LS
+let g:ale_elixir_elixir_ls_release = expand("/Users/alexcosta/Dev/clones/elixir-ls/rel/")
+
+" Optional, you can disable Dialyzer with this setting
+let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:true}}
+
+" Optional, configure as-you-type completions
+set completeopt=menu,menuone,preview,noselect,noinsert
+let g:ale_completion_enabled = 1
+
 " Ctrlp
-set runtimepath^=~/.vim/bundle/ctrlp
-let g:ctrlp_show_hidden = 1
+" set runtimepath^=~/.vim/bundle/ctrlp
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/](\.(git|hg|svn|elixir_ls)|(node_modules|tmp|_build|deps|rel|vendor|cover))$',
       \ 'file': '\v\.(pyc|exe|so|dll|swp)$',
       \ }
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+endif
+
+" FZF
+set rtp+=/usr/local/opt/fzf
 
 " Mix format for elixir code
 let g:mix_format_on_save = 1
