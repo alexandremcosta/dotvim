@@ -77,11 +77,6 @@ endif
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
 
-" Mix test
-nnoremap <Leader>t :execute "terminal mix test %:" . line(".")<CR>
-nnoremap <Leader>T :execute "terminal mix test %"<CR>
-nnoremap <Leader>ti :execute "terminal iex -S mix test %:" . line(".")<CR>
-
 " Move current line
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
@@ -139,13 +134,20 @@ let g:airline#extensions#tabline#formatter = 'short_path'
 
 " Ale
 " Required, explicitly enable Elixir LS
-let g:ale_linters.elixir = ['elixir-ls']
+let g:ale_linters = {}
+let g:ale_linters.elixir = ['elixir-ls', 'credo']
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
+let g:ale_fixers.elixir = ['mix_format']
+let g:ale_fix_on_save = 1
+nnoremap dg :ALEGoToDefinition<cr>
+nnoremap dh :ALEHover<cr>
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Required, tell ALE where to find Elixir LS
 let g:ale_elixir_elixir_ls_release = expand("/Users/alexcosta/Dev/clones/elixir-ls/rel/")
 
 " Optional, you can disable Dialyzer with this setting
-let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:true}}
+let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
 
 " Optional, configure as-you-type completions
 set completeopt=menu,menuone,preview,noselect,noinsert
@@ -165,7 +167,7 @@ endif
 set rtp+=/usr/local/opt/fzf
 
 " Mix format for elixir code
-let g:mix_format_on_save = 1
+let g:mix_format_on_save = 0
 
 " Vue.js
 autocmd FileType vue syntax sync fromstart
@@ -195,3 +197,43 @@ endfunction
 " Autoswp
 set title titlestring=
 
+" Toggle terminal mix test
+let s:term_buf_nr = -1
+
+function! s:ToggleTerminalLineTest() abort
+    if s:term_buf_nr == -1
+        execute "terminal mix test %:".line(".")
+        let s:term_buf_nr = bufnr("$")
+    else
+        try
+            execute "bdelete! " . s:term_buf_nr
+        catch
+            let s:term_buf_nr = -1
+            call <SID>ToggleTerminalLineTest()
+            return
+        endtry
+        let s:term_buf_nr = -1
+    endif
+endfunction
+
+function! s:ToggleTerminalFileTest() abort
+    if s:term_buf_nr == -1
+        execute "terminal mix test %"
+        let s:term_buf_nr = bufnr("$")
+    else
+        try
+            execute "bdelete! " . s:term_buf_nr
+        catch
+            let s:term_buf_nr = -1
+            call <SID>ToggleTerminalFileTest()
+            return
+        endtry
+        let s:term_buf_nr = -1
+    endif
+endfunction
+
+nnoremap <silent> <Leader>t :call <SID>ToggleTerminalLineTest()<CR>
+tnoremap <silent> <Leader>t <C-w>N:call <SID>ToggleTerminalLineTest()<CR>
+
+nnoremap <silent> <Leader>T :call <SID>ToggleTerminalFileTest()<CR>
+tnoremap <silent> <Leader>T <C-w>N:call <SID>ToggleTerminalFileTest()<CR>
