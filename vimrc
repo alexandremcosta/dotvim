@@ -15,7 +15,7 @@ set backupcopy=yes " Webpack needs this to detect file changes
 set backspace=start,eol " Allow backspacing over the start of insert
 set redrawtime=10000 " Large files keep syntax highlight
 
-" Set ok Variable
+" Set os Variable
 let g:os = substitute(system('uname'), '\n', '', '')
 
 " Mouse compatibility on OSX
@@ -39,7 +39,7 @@ command SudoW w !sudo tee % > /dev/null
 " Colorscheme
 set termguicolors
 set background=dark
-colorscheme molokai
+colorscheme gruvbox
 
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='hard'
@@ -219,43 +219,39 @@ endfunction
 " Autoswp
 set title titlestring=
 
-" Toggle terminal mix test
+" Split terminal with mix test
 let s:term_buf_nr = -1
 
-function! s:ToggleTerminalLineTest() abort
+function! s:MixTestLine() abort
     if s:term_buf_nr == -1
-        execute "terminal mix test %:".line(".")
+        execute 'terminal mix test % ' . '--exclude test --include line:'. line('.')
         let s:term_buf_nr = bufnr("$")
     else
         try
             execute "bdelete! " . s:term_buf_nr
         catch
-            let s:term_buf_nr = -1
-            call <SID>ToggleTerminalLineTest()
-            return
         endtry
         let s:term_buf_nr = -1
+        call <SID>MixTestLine()
     endif
 endfunction
 
-function! s:ToggleTerminalFileTest() abort
+function! s:MixTestFile() abort
     if s:term_buf_nr == -1
-        execute "terminal mix test %"
+        execute 'terminal mix test % --include integration'
         let s:term_buf_nr = bufnr("$")
     else
         try
             execute "bdelete! " . s:term_buf_nr
         catch
-            let s:term_buf_nr = -1
-            call <SID>ToggleTerminalFileTest()
-            return
         endtry
         let s:term_buf_nr = -1
+        call <SID>MixTestFile()
     endif
 endfunction
 
-nnoremap <silent> <Leader>t :call <SID>ToggleTerminalLineTest()<CR>
-tnoremap <silent> <Leader>t <C-w>N:call <SID>ToggleTerminalLineTest()<CR>
+nnoremap <silent> <Leader>t :call <SID>MixTestLine()<CR>
+tnoremap <silent> <Leader>t <C-w>N:call <SID>MixTestLine()<CR>
 
-nnoremap <silent> <Leader>T :call <SID>ToggleTerminalFileTest()<CR>
-tnoremap <silent> <Leader>T <C-w>N:call <SID>ToggleTerminalFileTest()<CR>
+nnoremap <silent> <Leader>T :call <SID>MixTestFile()<CR>
+tnoremap <silent> <Leader>T <C-w>N:call <SID>MixTestFile()<CR>
