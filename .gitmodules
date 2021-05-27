@@ -16,9 +16,6 @@
 [submodule "bundle/zoomwin"]
 	path = bundle/zoomwin
 	url = git@github.com:vim-scripts/ZoomWin.git
-[submodule "bundle/nerdtree"]
-	path = bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
 [submodule "bundle/ruby"]
 	path = bundle/ruby
 	url = https://github.com/vim-ruby/vim-ruby.git

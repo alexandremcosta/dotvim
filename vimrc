@@ -101,25 +101,47 @@ nnoremap <F6> :bn<CR>
 " F7 to switch tabs
 nnoremap <F7> :tabnext<CR>
 
-" Plugin mappings
-map <Leader>n :NERDTreeToggle<CR>
-nnoremap <Leader>a :Ack!<Space>
-nnoremap <silent> <Leader>f :ZoomWin<CR>
-
+" Whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
-" NERDTree show hidden files
-let NERDTreeShowHidden=1
+" Plugins
+nnoremap <silent> <Leader>f :ZoomWin<CR>
 
-" Close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" File explorer
+function! ToggleNetrw()
+    if g:NetrwIsOpen
+        let i = bufnr("$")
+        while (i >= 1)
+            if (getbufvar(i, "&filetype") == "netrw")
+                silent exe "bwipeout " . i
+            endif
+            let i-=1
+        endwhile
+        let g:NetrwIsOpen=0
+    else
+        let g:NetrwIsOpen=1
+        silent Lexplore
+    endif
+endfunction
 
-" Open NERDTree automatically when vim starts up on opening a directory
+map <Leader>n :call ToggleNetrw()<CR>
+
+" let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+
+" Toggle file explorer
+let g:NetrwIsOpen=0
+
+" Open file explorer automatically when vim starts up on opening a directory
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'Vexplore' argv()[0] | wincmd p | ene | endif
 
 " Ack
+nnoremap <Leader>a :Ack!<Space>
 if executable('ag')
   let g:ackprg = 'ag --hidden --vimgrep'
 endif
