@@ -23,7 +23,7 @@
 	git commit -m "Install Fugitive.vim bundle as a submodule."
 
 ## Removing plugins
-To remove `foo`:
+To remove `foo`
 
 	cd ~/.vim
 	git submodule deinit pack/plugins/start/foo
@@ -31,6 +31,8 @@ To remove `foo`:
 	rm -r .git/modules/pack/plugins/start/foo
 
 ## Mappings
+
+- File explorer `\n`
 
 - Ack  `\a`
 

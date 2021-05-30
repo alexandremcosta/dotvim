@@ -105,8 +105,20 @@ nnoremap <F7> :tabnext<CR>
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
-" Plugins
-nnoremap <silent> <Leader>f :ZoomWin<CR>
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <Leader>f :ZoomToggle<CR>
 
 " File explorer
 function! ToggleNetrw()
@@ -126,6 +138,7 @@ function! ToggleNetrw()
 endfunction
 
 map <Leader>n :call ToggleNetrw()<CR>
+map <Leader>N :let @/=expand("%:t") <Bar> execute 'Lexplore' expand("%:h") <Bar> normal n<CR>
 
 " let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -158,7 +171,7 @@ let g:airline#extensions#tabline#formatter = 'short_path'
 " Required, explicitly enable Elixir LS
 let g:ale_linters = {}
 let g:ale_linters.elixir = ['elixir-ls', 'credo']
-let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
+let g:ale_fixers = {'*': ['remove_trailing_lines']}
 let g:ale_fixers.elixir = ['mix_format']
 let g:ale_fix_on_save = 1
 nnoremap dg :ALEGoToDefinition<cr>
@@ -195,27 +208,6 @@ let g:mix_format_on_save = 0
 autocmd FileType vue syntax sync fromstart
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
-" Vue.js + NERDCommenter
-let g:ft = ''
-function! NERDCommenter_before()
-  if &ft == 'vue'
-    let g:ft = 'vue'
-    let stack = synstack(line('.'), col('.'))
-    if len(stack) > 0
-      let syn = synIDattr((stack)[0], 'name')
-      if len(syn) > 0
-	exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
-      endif
-    endif
-  endif
-endfunction
-function! NERDCommenter_after()
-  if g:ft == 'vue'
-    setf vue
-    let g:ft = ''
-  endif
-endfunction
-
 " Autoswp
 set title titlestring=
 
@@ -229,7 +221,6 @@ function! s:MixTestLine() abort
     else
         try
             execute "bdelete! " . s:term_buf_nr
-        catch
         endtry
         let s:term_buf_nr = -1
         call <SID>MixTestLine()
@@ -243,7 +234,6 @@ function! s:MixTestFile() abort
     else
         try
             execute "bdelete! " . s:term_buf_nr
-        catch
         endtry
         let s:term_buf_nr = -1
         call <SID>MixTestFile()
