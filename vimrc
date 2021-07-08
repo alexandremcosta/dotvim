@@ -188,18 +188,19 @@ let g:ale_elixir_elixir_ls_config = {'elixirLS': {'dialyzerEnabled': v:false}}
 set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_completion_enabled = 1
 
-" Ctrlp
-" set runtimepath^=~/.vim/bundle/ctrlp
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](\.(git|hg|svn|elixir_ls)|(node_modules|tmp|_build|deps|rel|vendor|cover))$',
-      \ 'file': '\v\.(pyc|exe|so|dll|swp)$',
-      \ }
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-endif
-
 " FZF
 set rtp+=/usr/local/opt/fzf
+nmap <C-P> :FZF<CR>
+
+" Jump to existing window if possible
+let g:fzf_buffers_jump = 1
+" Override key commands
+let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit' }
+
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " Mix format for elixir code
 let g:mix_format_on_save = 0
@@ -216,11 +217,12 @@ let s:term_buf_nr = -1
 
 function! s:MixTestLine() abort
     if s:term_buf_nr == -1
-        execute 'terminal mix test % ' . '--exclude test --include line:'. line('.')
+        execute 'terminal mix test % ' . '--exclude test --include line:'. line('.')|wincmd w
         let s:term_buf_nr = bufnr("$")
     else
         try
             execute "bdelete! " . s:term_buf_nr
+        catch
         endtry
         let s:term_buf_nr = -1
         call <SID>MixTestLine()
@@ -229,19 +231,20 @@ endfunction
 
 function! s:MixTestFile() abort
     if s:term_buf_nr == -1
-        execute 'terminal mix test % --include integration'
+        execute 'terminal mix test % --include integration'|wincmd w
         let s:term_buf_nr = bufnr("$")
     else
         try
             execute "bdelete! " . s:term_buf_nr
+        catch
         endtry
         let s:term_buf_nr = -1
         call <SID>MixTestFile()
     endif
 endfunction
 
-nnoremap <silent> <Leader>t :call <SID>MixTestLine()<CR>
-tnoremap <silent> <Leader>t <C-w>N:call <SID>MixTestLine()<CR>
+nnoremap <silent> <Leader>t :call <SID>MixTestLine()<CR>zz
+tnoremap <silent> <Leader>t <C-w>N:call <SID>MixTestLine()<CR>zz
 
-nnoremap <silent> <Leader>T :call <SID>MixTestFile()<CR>
-tnoremap <silent> <Leader>T <C-w>N:call <SID>MixTestFile()<CR>
+nnoremap <silent> <Leader>T :call <SID>MixTestFile()<CR>zz
+tnoremap <silent> <Leader>T <C-w>N:call <SID>MixTestFile()<CR>zz
