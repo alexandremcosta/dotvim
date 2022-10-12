@@ -17,7 +17,9 @@
 - Return to last edit position when opening files
 - Navigate split panels in normal mode with `Ctrl` + `hjkl`
 - Move current line in insert/visual mode with `Ctrl` + `jk`
-- Elixir support: elixir-ls, credo, `mix format` on save, go to function definition `dg`, hover function docs `dh`
+- Elixir support: elixir-ls, credo, `mix format` on save
+- Elixir language server: check `ale_elixir_elixir_ls_release` on vimrc to setup
+- Elixir language server: go to function definition `dg`, go back `<Ctrl-o>`, hover function docs `dh`
 - [Minimap](https://github.com/wfxr/minimap.vim)
 - [Airline](https://github.com/vim-airline/vim-airline)
 
