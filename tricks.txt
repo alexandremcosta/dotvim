@@ -6,7 +6,3 @@ open buffer                              						:bN (N = buffer number)
 delete current buffer									:bd
 place cursor on middle of screen							zz
 convert tabs to spaces                   						:retab
-
-# Custom mappings
-switch buffers 										F5 and F6
-switch tabs 										F7
