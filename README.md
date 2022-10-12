@@ -15,8 +15,8 @@
 - Copy/paste support to system clipboard on Linux `<Leader>c` or `<Leader>v`
 - Use `:SudoW` to write (save) file with sudo
 - Return to last edit position when opening files
-- Navigate split panels in normal mode Ctrl + `hjkl`
-- Move current line in insert/visual mode with Ctrl + `jk`
+- Navigate split panels in normal mode with `Ctrl` + `hjkl`
+- Move current line in insert/visual mode with `Ctrl` + `jk`
 - Elixir support: elixir-ls, credo, `mix format` on save, go to function definition `dg`, hover function docs `dh`
 - [Minimap](https://github.com/wfxr/minimap.vim)
 - [Airline](https://github.com/vim-airline/vim-airline)
