@@ -39,7 +39,7 @@ On arch linux you can just install the `powerline-fonts` community package
 | Toggle current split pane **fullscreen** | `<Leader>f` |
 | Run elixir **test** under cursor | `<Leader>t` |
 | Run all elixir **tests** on current file | `<Leader>T` |
-| Elixir **inspect**: paste `|> IO.inspect(label: "")` leaving cursor between quotes | `<Leader>i` |
+| Elixir **inspect**: paste `IO.inspect(label: "")` leaving cursor between quotes | `<Leader>i` |
 
 ## Add plugin
 For example, the famous git plugin: `vim-fugitive`
