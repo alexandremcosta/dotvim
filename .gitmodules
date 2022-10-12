@@ -16,9 +16,6 @@
 [submodule "bundle/elixir"]
 	path = bundle/elixir
 	url = https://github.com/elixir-lang/vim-elixir.git
-[submodule "bundle/mix-format"]
-	path = bundle/mix-format
-	url = https://github.com/mhinz/vim-mix-format.git
 [submodule "bundle/airline"]
 	path = bundle/airline
 	url = https://github.com/vim-airline/vim-airline
@@ -37,3 +34,6 @@
 [submodule "bundle/ale"]
 	path = bundle/ale
 	url = https://github.com/dense-analysis/ale.git
+[submodule "bundle/minimap"]
+	path = bundle/minimap
+	url = https://github.com/wfxr/minimap.vim
