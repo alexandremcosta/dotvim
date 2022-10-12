@@ -234,6 +234,12 @@ autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 " Autoswp
 set title titlestring=
 
+" Minimap
+let g:minimap_git_colors = 1
+let g:minimap_highlight_search = 1
+let g:minimap_highlight_range = 1
+let g:minimap_width = 7
+
 " Split terminal with mix test
 let s:term_buf_nr = -1
 
