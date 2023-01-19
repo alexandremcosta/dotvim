@@ -34,6 +34,3 @@
 [submodule "bundle/ale"]
 	path = bundle/ale
 	url = https://github.com/dense-analysis/ale.git
-[submodule "bundle/minimap"]
-	path = bundle/minimap
-	url = https://github.com/wfxr/minimap.vim

@@ -16,7 +16,6 @@ set backupcopy=yes " Webpack needs this to detect file changes.
 set backspace=start,eol " Allow backspacing over the start of insert.
 set redrawtime=10000 " Large files keep syntax highlight.
 set scrolloff=5 " Always show at least 10 lines above/below the cursor.
-set autoread " Autoload file changes. You can undo by pressing u.
 
 " Set os Variable
 let g:os = substitute(system('uname'), '\n', '', '')
@@ -195,7 +194,6 @@ let g:airline#extensions#tabline#formatter = 'short_path'
 " Ale
 let g:ale_linters = {}
 let g:ale_linters.elixir = ['elixir-ls', 'credo']
-" let g:ale_fixers = {'*': ['remove_trailing_lines']}
 let g:ale_fixers = {'elixir': ['mix_format']}
 let g:ale_fix_on_save = 1
 nnoremap dg :ALEGoToDefinition<cr>
@@ -213,7 +211,7 @@ set completeopt=menu,menuone,preview,noselect,noinsert
 let g:ale_completion_enabled = 1
 
 " FZF
-set rtp+=/usr/local/opt/fzf
+set rtp+=/Users/alexcosta/brew/opt/fzf/
 nmap <C-P> :Files<CR>
 
 " Jump to existing window if possible
@@ -227,18 +225,8 @@ let g:fzf_action = {
 " let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let $FZF_DEFAULT_COMMAND = 'rg --files --smart-case --no-ignore-vcs --hidden --sortr accessed'
 
-" Vue.js
-autocmd FileType vue syntax sync fromstart
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
-
 " Autoswp
 set title titlestring=
-
-" Minimap
-let g:minimap_git_colors = 1
-let g:minimap_highlight_search = 1
-let g:minimap_highlight_range = 1
-let g:minimap_width = 7
 
 " Split terminal with mix test
 let s:term_buf_nr = -1
