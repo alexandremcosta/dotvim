@@ -1,6 +1,3 @@
-execute pathogen#infect()
-" Pathogen setup
-
 syntax on
 " Removed temporarily because of elixir indentation conflicts
 filetype plugin indent on
