@@ -1,11 +1,10 @@
 syntax on
 " Removed temporarily because of elixir indentation conflicts
-filetype plugin indent on
+filetype plugin indent off
 
 set number
 set incsearch
 set smartcase
-set cursorline!
 set ignorecase
 set colorcolumn=99
 set nowrap " Prevent line breaks on long lines.
@@ -36,23 +35,11 @@ map ; :
 command SudoW w !sudo tee % > /dev/null
 
 " Colorscheme
-set background=dark
 set termguicolors
-colorscheme codedark
-highlight ColorColumn guibg=DarkGray
+colorscheme dracula
 
-" for Kitty background color to follow vim colorscheme
+" Fix bug in kitty where background of vim follows kitty not colorscheme
 let &t_ut=''
-
-" let g:gruvbox_italic=1
-" let g:gruvbox_contrast_dark='hard'
-" " Increase contrast of grubbox background
-" if g:colors_name == "gruvbox"
-"   highlight Normal ctermbg=16 guibg=#000000
-" endif
-
-"" Opacity
-"" hi Normal guibg=NONE ctermbg=NONE
 
 " Copy and paste to clipboard
 if g:os == "Darwin"
@@ -65,10 +52,12 @@ else
 endif
 
 " Return to last edit position when opening files
-autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
+
+" Git Blame
+nnoremap <silent> <Leader>b :!git blame --color-by-age --date short -- %<CR>
 
 " Folds
 " set foldmethod=syntax
@@ -100,9 +89,8 @@ inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
-" Resize splits with + or - key on normal mode
-nnoremap - :vertical resize -20<CR> :resize -5<CR><C-w>_
-nnoremap = :vertical resize +20<CR> :resize +5<CR>
+nnoremap <silent> <Leader>= :exe "resize " . (winheight(0) * 10/9)<CR>:exe "vertical resize " . (winwidth(0) * 10/9)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 9/10)<CR>:exe "vertical resize " . (winwidth(0) * 9/10)<CR>
 
 " Buffers
 set hidden
@@ -167,7 +155,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " Ack
 nnoremap <Leader>a :Ack!<Space>
 if executable('rg')
-  let g:ackprg = 'rg --vimgrep --smart-case --no-ignore-vcs --hidden --sortr accessed'
+  let g:ackprg = 'rg --vimgrep --smart-case --ignore-vcs --hidden --sortr accessed'
 endif
 
 " Auto close the Quickfix list after pressing '<enter>' on a list item
@@ -220,7 +208,7 @@ let g:fzf_action = {
       \ 'ctrl-v': 'vsplit' }
 
 " let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-let $FZF_DEFAULT_COMMAND = 'rg --files --smart-case --no-ignore-vcs --hidden --sortr accessed'
+let $FZF_DEFAULT_COMMAND = "rg --files --smart-case --ignore-vcs --hidden --sortr accessed -g '!.git'"
 
 " Autoswp
 set title titlestring=
@@ -233,7 +221,7 @@ function! s:MixTestLine() abort
         execute 'terminal mix test % ' . '--exclude test --include line:'. line('.')
         set nonu " remove numbers
         set cc= " remove colorcolumn
-        resize -5
+        resize -15
         wincmd w " move back to last split pane
         let s:term_buf_nr = bufnr("$")
     else
@@ -251,7 +239,7 @@ function! s:MixTestFile() abort
         execute 'terminal mix test % --include integration'
         set nonu " remove numbers
         set cc= " remove colorcolumn
-        resize -5
+        resize -15
         wincmd w " move back to last split pane
         let s:term_buf_nr = bufnr("$")
     else
@@ -272,3 +260,14 @@ tnoremap <silent> <Leader>T <C-w>N:call <SID>MixTestFile()<CR>zz
 
 nmap <Leader>i i\|> IO.inspect(label: "")<ESC>hi
 imap <Leader>i \|> IO.inspect(label: "")<ESC>hi
+
+if &term =~ "xterm\\|rxvt"
+  " use an orange cursor in insert mode
+  let &t_SI = "\<Esc>]12;green\x7"
+  " use a red cursor otherwise
+  let &t_EI = "\<Esc>]12;gray\x7"
+  silent !echo -ne "\033]12;gray\007"
+  " reset cursor when vim exits
+  autocmd VimLeave * silent !echo -ne "\033]112\007"
+  " use \003]12;gray\007 for gnome-terminal and rxvt up to version 9.21
+endif

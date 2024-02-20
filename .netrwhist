@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/alex/.config/nvim/lua/user'
+let g:netrw_dirhist_3='/Users/alex/.local/share'
+let g:netrw_dirhist_2='/Users/alex/.local/share/nvim'
+let g:netrw_dirhist_1='/Users/alex/.local/share/nvim/lazy'
+let g:netrw_dirhist_0='/Users/alex/.local/share/nvim/lazy/copilot.vim'
+let g:netrw_dirhist_9='/Users/alex/.local/share/nvim/lazy'
+let g:netrw_dirhist_8='/Users/alex/.local/share/nvim/lazy/astrocommunity'
+let g:netrw_dirhist_7='/Users/alex/.local/share/nvim/lazy/astrocommunity/lua'
+let g:netrw_dirhist_6='/Users/alex/.local/share/nvim/lazy/astrocommunity/lua/astrocommunity'
+let g:netrw_dirhist_5='/Users/alex/.local/share/nvim/lazy/astrocommunity/lua/astrocommunity/syntax'
